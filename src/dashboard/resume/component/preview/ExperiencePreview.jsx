@@ -19,10 +19,12 @@ const ExperiencePreview = ({ resumeInfo }) => {
             {experience.city},{experience?.state}
           <span>
             {experience?.startDate}
+            {" "}To{" "}
             {experience?.currentlyWorking ? "Present" : experience?.endDate}
           </span>
           </h2>
-          <p className="text-xs my-2 text-justify">{experience.workSummery}</p>
+          {/* <p className="text-xs my-2 text-justify">{experience.workSummery}</p> */}
+          <div className="text-xs my-2 text-justify" dangerouslySetInnerHTML={{__html:experience?.workSummery}}/>
         </div>
       ))}
     </div>

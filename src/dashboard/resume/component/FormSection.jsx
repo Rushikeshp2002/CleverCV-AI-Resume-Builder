@@ -4,11 +4,12 @@ import { ArrowLeft, ArrowRight, LayoutGrid } from "lucide-react"
 import { useState } from "react"
 
 import SummaryForm from "./form/SummaryForm"
+import ExperienceForm from "./form/ExperienceForm"
 
 
 const FormSection = () => {
   const[activeIndex,setActiveIndex] = useState(1);
-  const [enableNext, setEnableNext] = useState(false);
+  const [enableNext, setEnableNext] = useState(true);
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -23,7 +24,9 @@ const FormSection = () => {
       </div>
       {
         activeIndex == 1 ? <PersonalDetailForm enableNext={(v)=>setEnableNext(v)} /> 
-        : activeIndex == 2 ? <SummaryForm enableNext={(v)=>setEnableNext(v)}/> : null
+        : activeIndex == 2 ? <SummaryForm enableNext={(v)=>setEnableNext(v)}/> 
+        : activeIndex == 3 ? <ExperienceForm enableNext={(v)=>setEnableNext(v)}/>
+        : null
       }
     </div>
   )
