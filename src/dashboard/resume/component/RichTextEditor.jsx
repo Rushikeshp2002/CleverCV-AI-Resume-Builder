@@ -24,26 +24,28 @@ import {
 import { AIchatSession } from "../../../../service/AiModel";
 import { toast } from "sonner";
 
-const PROMPT = "position:{positionTitle}, Depending on the position title give me  5-7 bullet points for my experience in resume,give me result in HTML Format and give me the points directly without writing the position and experience thing and no qoutes please, qoutes means "
+const PROMPT = "Forget everything from previous Promtp request provide me output for this, position:{positionTitle},Depending on the position title and give me  4-5 ats friendly points that are one liners for my experience in resume,give me result in HTML Format and give me the points directly eg: Developed and deployed machine learning models. Like this just string nothing else without any kind of object heirarchy"
 
-const RichTextEditor = ({onRichTextEditorChange,index}) => {
-  const [value, setValue] = useState();
+const RichTextEditor = ({onRichTextEditorChange,index,defaultValue}) => {
+  const [value, setValue] = useState(defaultValue);
   const {resumeInfo,setResumeInfo} = useContext(ResumeContext)
   const [loading,setLoading] = useState(false);
 
   const GenerateSummaryFromaI=async()=>{
     setLoading(true);
     if(!resumeInfo.experience[index].title){
-        toast("Please add position title")
+        toast.error("Please add position title")
         return;
     }
+    console.log(resumeInfo.experience[index].title);
     const prompt = PROMPT.replace('{positionTitle}', resumeInfo?.experience[index]?.title)
+    console.log(prompt)
     const result = await AIchatSession.sendMessage(prompt);
     console.log(result.response.text())
     const resp = result.response.text()
     setLoading(false);
 
-    setValue(resp.replace('[','').replace(']','').replace('"','').replace('"',''));
+    setValue(resp.replace('[','').replace(']','').replace(/"/g,''));
   }
   return (
     <div>
@@ -60,8 +62,8 @@ const RichTextEditor = ({onRichTextEditorChange,index}) => {
           }}
         >
           <Toolbar>
-            <BtnRedo />
             <BtnUndo />
+            <BtnRedo />
             <Separator />
             <BtnBold />
             <BtnItalic />

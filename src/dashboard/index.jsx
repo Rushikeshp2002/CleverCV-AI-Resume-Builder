@@ -25,7 +25,7 @@ const Dashboard = () => {
       <div className="grid grid-col-2  md:grid-cols-3 lg:grid-cols-5 mt-10 gap-5">
         <AddResume/>
         {resumeList.length>0&&resumeList.map((resume,index)=>(
-          <ResumeItem key={index} resume={resume}/>
+          <ResumeItem key={index} resume={resume} refreshData={GetResumesList}/>
         ))}
 
       </div>

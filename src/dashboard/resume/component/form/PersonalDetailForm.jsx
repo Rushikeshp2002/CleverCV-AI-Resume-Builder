@@ -40,7 +40,7 @@ const PersonalDetailForm = ({enableNext}) => {
         console.log(resp);
         enableNext(true);
         setLoading(false)
-        toast("Detail Updated")
+        toast.success("Detail Updated")
     },(error)=>{
         setLoading(false)
     })

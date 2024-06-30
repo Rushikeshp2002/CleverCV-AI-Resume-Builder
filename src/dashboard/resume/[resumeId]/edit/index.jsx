@@ -1,9 +1,11 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import FormSection from "../../component/FormSection";
 import ResumePreview from "../../component/ResumePreview";
 import { ResumeContext } from "@/context/ResumeContext";
 import dummy from "@/data/dummy";
+import GlobalApi from "../../../../../service/GlobalApi";
 
 
 const EditResume = () => {
@@ -11,10 +13,19 @@ const EditResume = () => {
   const [resumeInfo, setResumeInfo] = useState();
   
   useEffect(()=>{
-    console.log(params.resumeId);
-    setResumeInfo(dummy)
+    // console.log(params.resumeId);
+   
+    GetResumeInfo();
 
   },[])
+
+  const GetResumeInfo=()=>{
+    GlobalApi.GetResumeById(params.resumeId).then((resp)=>{
+      console.log(resp.data.data);
+      setResumeInfo(resp.data.data);
+      
+    })
+  }
   return (
     <ResumeContext.Provider value={{resumeInfo,setResumeInfo}}>
 

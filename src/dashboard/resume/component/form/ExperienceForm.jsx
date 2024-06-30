@@ -27,10 +27,10 @@ const ExperienceForm = ({ enableNext }) => {
   const [loading, setLoading] = useState(false);
   const params=useParams();
 
-//   useEffect(()=>{
-//     resumeInfo?.experience.length>0&&setExperiencList(resumeInfo?.Experience)
+  useEffect(()=>{
+    resumeInfo&&setExperiencList(resumeInfo?.experience)
     
-// },[])
+},[])
 
 
   const handleChange = (index, event) => {
@@ -71,25 +71,39 @@ const ExperienceForm = ({ enableNext }) => {
     })
   },[experiencList])
 
-  const onSave=()=>{
-    setLoading(true)
-    const data={
-        data:{
-            Experience:experiencList.map(({ id, ...rest }) => rest)
+  const onSave = () => {
+    setLoading(true);
+    
+    // Construct the payload
+    const data = {
+      data: {
+        experience: experiencList.map(({ id, ...rest }) => rest),
+      },
+    };
+  
+    // Log the payload for debugging
+    console.log('Payload data:', JSON.stringify(data, null, 2));
+  
+    // Send the PUT request
+    GlobalApi.UpdateResumeDetails(params?.resumeId, data)
+      .then((res) => {
+        setLoading(false);
+        console.log('Response:', res);
+        toast.success('Details updated!');
+      })
+      .catch((error) => {
+        setLoading(false);
+        // Log detailed error information
+        if (error.response) {
+          console.error('Error response:', error.response);
+          console.error('Error data:', error.response.data);
+        } else {
+          console.error('Error:', error);
         }
-    }
-
-     console.log(experiencList)
-
-    GlobalApi.UpdateResumeDetails(params?.resumeId,data).then(res=>{
-        console.log(res);
-        setLoading(false);
-        toast('Details updated !')
-    },(error)=>{
-        setLoading(false);
-    })
-
-}
+        toast.error('Error updating details!');
+      });
+  };
+  
 
   return (
     <div>
@@ -102,33 +116,33 @@ const ExperienceForm = ({ enableNext }) => {
                     <div className="grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg">
                         <div>
                             <label className="text-xs">Position Title</label>
-                            <Input name="title" defaultValue={item?.title} onChange={(event)=>handleChange(index,event)} />
+                            <Input name="title" defaultValue={item.title} onChange={(event)=>handleChange(index,event)} />
                         </div>
                         <div>
                             <label className="text-xs">Company Name</label>
-                            <Input name="companyName"  defaultValue={item?.companyName} onChange={(event)=>handleChange(index,event)} />
+                            <Input name="companyName"  defaultValue={item.companyName} onChange={(event)=>handleChange(index,event)} />
                         </div>
                         <div>
                             <label className="text-xs">City</label>
-                            <Input name="city" defaultValue={item?.city} onChange={(event)=>handleChange(index,event)} />
+                            <Input name="city" defaultValue={item.city} onChange={(event)=>handleChange(index,event)} />
                         </div>
                         <div>
                             <label className="text-xs">State</label>
-                            <Input name="state" defaultValue={item?.state} onChange={(event)=>handleChange(index,event)} />
+                            <Input name="state" defaultValue={item.state} onChange={(event)=>handleChange(index,event)} />
                         </div>
                         <div>
                             <label className="text-xs">Start Date</label>
-                            <Input type="date" name="startDate"  defaultValue={item?.startDate} onChange={(event)=>handleChange(index,event)} />
+                            <Input type="date" name="startDate"  defaultValue={item.startDate} onChange={(event)=>handleChange(index,event)} />
                         </div>
                         <div>
                             <label className="text-xs">End Date</label>
-                            <Input type="date"  defaultValue={item?.endDate} name="endDate" onChange={(event)=>handleChange(index,event)} />
+                            <Input type="date"  defaultValue={item.endDate} name="endDate" onChange={(event)=>handleChange(index,event)} />
                         </div>
                         <div className="col-span-2">
                             <RichTextEditor
                             index={index}
-                            defaultValue={item?.workSummery}
-                             onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummery',index)}
+                            defaultValue={item.workSummery}
+                            onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummery',index)}
                             />
                         </div>
                     </div>

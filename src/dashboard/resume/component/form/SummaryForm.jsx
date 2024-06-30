@@ -62,7 +62,7 @@ const SummaryForm = ({ enableNext }) => {
         console.log(resp);
         enableNext(true);
         setLoading(false);
-        toast("Detail Updated");
+        toast.success("Detail Updated");
       },
       (error) => {
         setLoading(false);
@@ -100,6 +100,7 @@ const SummaryForm = ({ enableNext }) => {
           onChange={(e) => setSummary(e.target.value)}
           value={summary}
           placeholder=""
+          defaultValue={resumeInfo.summery}
         />
         <div className="mt-2 flex justify-end">
           <Button disabled={loading} type="submit">
@@ -113,7 +114,7 @@ const SummaryForm = ({ enableNext }) => {
         <h2 className="font-bold text-lg">Suggestions</h2>
         {aiGeneratedSummeryList.map((item, index) => (
           <div key={index} className="p-5 shadow-lg my-4 rounded-lg cursor-pointer" onClick={() => handleSuggestionClick(item.summary)}>
-            <h2 className="font-bold my-1 text-primary">Level: {item.level}</h2>
+            <h2 className="font-bold my-1 text-primary">Level: <span className="text-red-500">{item.experience_level}</span> </h2>
             <p>{item.summary}</p>
           </div>
         ))}

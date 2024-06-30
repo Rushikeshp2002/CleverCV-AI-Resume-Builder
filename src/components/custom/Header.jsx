@@ -3,13 +3,19 @@ import { Button } from "../ui/button"
 import { UserButton, useUser } from "@clerk/clerk-react"
 
 
+
 const Header = () => {
-    const {user,isSignedIn} = useUser();
+    const {isSignedIn} = useUser();
   return (
     <div className="p-3 px-5 flex justify-between shadow-sm">
-        <img src="/logo.svg"/>
+        <Link to='/'>
+          <div className="flex justify-center align-middle items-center gap-3">
+          <img src="/logo.svg"/>
+          <h1 id="headingTitle">Clever<span id="cv">CV</span></h1>
+          </div>
+        </Link>
         {isSignedIn?
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
                 <Link to={'/dashboard'}><Button variant={'outline'}>Dashboard</Button></Link>
                 <UserButton/>
             </div>
