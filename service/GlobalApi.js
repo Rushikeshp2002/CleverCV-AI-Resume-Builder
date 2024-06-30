@@ -6,7 +6,7 @@ const API_KEY = import.meta.env.VITE_STRAPI_API_KEY;
 console.log("API_KEY:", API_KEY); // Debugging
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:1337/api/',
+    baseURL: 'https://clevercv-strapi-backend.onrender.com/api/',
     headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${API_KEY}`
