@@ -42,7 +42,7 @@ const ViewResume = () => {
             <RWebShare
               data={{
                 text: "Hello Everyone, this is my resume please open URL to see",
-                url: "http://localhost:5173"+"/my-resume/"+resumeId+"/view",
+                url: "https://clevercv-strapi-backend.onrender.com"+"/my-resume/"+resumeId+"/view",
                 title: resumeInfo?.firstName+" "+resumeInfo?.lastName+" resume",
               }}
               onClick={() => console.log("shared successfully!")}
