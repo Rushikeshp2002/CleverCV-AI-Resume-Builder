@@ -25,7 +25,8 @@ Demo video: https://youtu.be/4C4R1uMHhns?si=g3KvdcCcWHLuJCYy
 
   <h2>Project Demo</h2>
   <p>Check out the demo video of CleverCV to see how it can help you craft the perfect resume with ease.</p>
-  <p><a href="https://your-demo-video-link" target="_blank">Watch Demo Video</a></p>
+  <p><a href="https://youtu.be/4C4R1uMHhns?si=g3KvdcCcWHLuJCYy
+" target="_blank">Watch Demo Video</a></p>
 
   <h2>About Me</h2>
   <p>I'm Rushikesh, a passionate front-end developer specializing in React.js. I've built various projects, including CleverCV, to make life easier for users.</p>
